@@ -27,5 +27,3 @@ Output
 
     Cost
     [(ROW_0, COL_0), ...]
-
-Hello Test
