@@ -13,7 +13,7 @@ GitHub: https://github.com/minhcaooo34/Project04.git
 
 How to compile dijkstras.cpp: Run "make" on the command line
 
-How to execute dijkstras: Run ./src/dijkstras < data/[input].txt
+How to execute dijkstras: Run ./src/dijkstras < data/[input].txt (remove "data/" if input is in Project04 directory)
 
 What will happen: The program will output the total weight to traverse and every step taken
 
