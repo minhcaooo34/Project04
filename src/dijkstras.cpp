@@ -138,10 +138,10 @@ int main() {
         return 0;
     }
 
-    // Output the cost (excluding destination tile cost)
+    // Output the cost (including the starting tile's cost but excluding the destination tile's cost)
     int totalCost = 0;
-    for (size_t i = 1; i < path.size(); ++i) {  // Use size_t to match path.size() type
-        totalCost += tileCosts[mapLayout[path[i].first][path[i].second]]; // Cost of leaving the tile
+    for (size_t i = 0; i < path.size() - 1; ++i) {  // Exclude the last tile (i < path.size() - 1)
+        totalCost += tileCosts[mapLayout[path[i].first][path[i].second]]; // Cost of entering each tile
     }
     cout << totalCost << endl;
 
