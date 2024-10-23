@@ -55,7 +55,7 @@ void readInput(unordered_map<char, int> &tileCosts, vector<vector<char>> &mapLay
     cin >> endPos.first >> endPos.second;
 }
 
-// Dijkstra's algorithm placed in a separate function
+// Dijkstra's algorithm
 vector<pair<int, int>> dijkstra(const unordered_map<char, int> &tileCosts, const vector<vector<char>> &mapLayout, pair<int, int> startPos, pair<int, int> endPos) {
     int rows = mapLayout.size();
     int cols = mapLayout[0].size();
@@ -66,7 +66,7 @@ vector<pair<int, int>> dijkstra(const unordered_map<char, int> &tileCosts, const
     // Distance table to store the cost of reaching each cell
     vector<vector<int>> dist(rows, vector<int>(cols, INT_MAX));
 
-    // Table to store the previous cell for path reconstruction
+    // Table to store the previous cell for path
     vector<vector<pair<int, int>>> prev(rows, vector<pair<int, int>>(cols, {-1, -1}));
 
     // Starting node (don't include start node cost)
@@ -83,7 +83,7 @@ vector<pair<int, int>> dijkstra(const unordered_map<char, int> &tileCosts, const
         int currRow = current.row;
         int currCol = current.col;
 
-        // Stop at destination
+        // Stop
         if (currRow == endPos.first && currCol == endPos.second) {
             break;
         }
