@@ -1,5 +1,7 @@
 Project 04: Path Finding
-Project 04: Path Finding Project Partners: David Cheves & Minh Cao NetIDs: dcheves & mcao12
+Project 04: Path Finding 
+Project Partners: David Cheves & Minh Cao 
+NetIDs: dcheves & mcao12
 
 GitHub: https://github.com/minhcaooo34/Project04.git
 
