@@ -10,7 +10,9 @@ How to compile dijkstras.cpp: Run "make" on the command line How to execute dijk
 
 How to compile generator.cpp: Run "make" on the command line How to execute generator: Run ./data/generator What will happen: A text file of size N (Determined in generator.cpp) will be in the Project4 directory as map[N].txt
 
-Summary: I started by working on reading input in from cin. I had to determine what data structures to use and I had to figure out the best way to read in data so that it could be used in the Dijkstras Algorithm. Then, Minh started on the implementation of Dijkstras Algorithm. He figured out the solution for the almost completely and was printing out the correct path to take, but didn't have the correct cost. I went into the program and found where his mistake was and then the program was working correctly. I enjoyed working with Minh. We worked well together and were able to communicate effectively to finish this project on time.
+Summary: I started by working on reading input in from cin. I had to determine what data structures to use and I had to figure out the best way to read in data so that it could be used in the Dijkstras Algorithm. Then, Minh started on the implementation of Dijkstras Algorithm. He figured out the solution almost completely and was 
+printing out the correct path to take, but didn't have the correct cost. I also completed the markdown table and creating the map generator. I went into the program and found where his mistake was and then the program was working correctly. I enjoyed working with Minh. We worked well together and we were able to communicate effectively 
+to finish this project on time.
 
 |               |  Markdown Table   |                       |
 | N             | Elapsed Time (s)  | Memory Usage (bytes)  |
