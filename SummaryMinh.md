@@ -14,7 +14,9 @@ particularly for extremely large maps. This is a direct consequence of needing t
 distances, previous nodes, and the priority queue.
 
 SUMMARY:
-I basically worked on the Dijkstra's algorithm. I was having some issues getting it set up so I had my cousin (previous CS302 student) how 
+I basically worked on the Dijkstra's algorithm. David worked on reading in the information with cin and determined what structures to use 
+within this program. I was having some issues getting it set up so I had my cousin (previous CS302 student) how 
 to start it and the best way to approach it. After setting it up it took me about 1 1/2 to 2 hours to fully complete the program. However, 
 even then it wasn't fully working correctly and I had David take a look to see where I went wrong. Overall we figured out the issue and 
-the program is fully working now. 
+the program is fully working now. Communication was very good overall and enjoyed working with David. It really helped getting a second
+pair of eyes seeing my mistakes after sitting at a computer for a long time.
