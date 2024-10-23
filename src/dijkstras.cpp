@@ -1,6 +1,14 @@
 // dijsktras.cpp
 
-// Main Execution
+// Partners: David Cheves & Minh Cao
+// netIDs:    dcheves & mcao12
+// Program Description: This program practices with the implementation of Dijkstras Algorithm. 
+//                      It reads input from cin to determine the size of the board, the weights
+//                      of each edge, and where to start and end. From that input, Dijkstras 
+//                      algorithm is run. This finds the shortest path to the destination node
+//                      and then outputs the total cost to travel to that node and each step
+//                      of the path that the algorithm took. This program worked with Dijkstras
+//                      algorithm and how to implement it on a weighted graph.
 
 #include <iostream>
 #include <vector>
@@ -19,11 +27,11 @@ struct Node {
 };
 
 void readInput(unordered_map<char, int> &tileCosts, vector<vector<char>> &mapLayout, pair<int, int> &startPos, pair<int, int> &endPos) {
-    int TILES_N;
-    cin >> TILES_N;
+    int numTiles;
+    cin >> numTiles;
 
-    // Read tile symbols and their corresponding costs
-    for (int i = 0; i < TILES_N; ++i) {
+    // Read tile symbols and their costs
+    for (int i = 0; i < numTiles; ++i) {
         char tileName;
         int tileCost;
         cin >> tileName >> tileCost;
@@ -31,41 +39,41 @@ void readInput(unordered_map<char, int> &tileCosts, vector<vector<char>> &mapLay
     }
 
     // Read the map dimensions
-    int MAP_ROWS, MAP_COLUMNS;
-    cin >> MAP_ROWS >> MAP_COLUMNS;
+    int rows, cols;
+    cin >> rows >> cols;
 
     // Read the map layout
-    mapLayout.resize(MAP_ROWS, vector<char>(MAP_COLUMNS));
-    for (int i = 0; i < MAP_ROWS; ++i) {
-        for (int j = 0; j < MAP_COLUMNS; ++j) {
+    mapLayout.resize(rows, vector<char>(cols));
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
             cin >> mapLayout[i][j];
         }
     }
 
-    // Read the runner's starting and ending positions
+    // Read the starting and ending positions
     cin >> startPos.first >> startPos.second;
     cin >> endPos.first >> endPos.second;
 }
 
 // Dijkstra's algorithm placed in a separate function
 vector<pair<int, int>> dijkstra(const unordered_map<char, int> &tileCosts, const vector<vector<char>> &mapLayout, pair<int, int> startPos, pair<int, int> endPos) {
-    int MAP_ROWS = mapLayout.size();
-    int MAP_COLUMNS = mapLayout[0].size();
+    int rows = mapLayout.size();
+    int cols = mapLayout[0].size();
 
     // Priority queue to process nodes with the smallest cost first
     priority_queue<Node, vector<Node>, greater<Node>> pq;
 
     // Distance table to store the cost of reaching each cell
-    vector<vector<int>> dist(MAP_ROWS, vector<int>(MAP_COLUMNS, INT_MAX));
+    vector<vector<int>> dist(rows, vector<int>(cols, INT_MAX));
 
     // Table to store the previous cell for path reconstruction
-    vector<vector<pair<int, int>>> prev(MAP_ROWS, vector<pair<int, int>>(MAP_COLUMNS, {-1, -1}));
+    vector<vector<pair<int, int>>> prev(rows, vector<pair<int, int>>(cols, {-1, -1}));
 
-    // Starting node (initial cost is 0 since we don't count entering the start)
+    // Starting node (don't include start node cost)
     pq.push({startPos.first, startPos.second, 0});
     dist[startPos.first][startPos.second] = 0;
 
-    // Direction vectors for moving up, down, left, right
+    // Direction vectors
     vector<pair<int, int>> directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
     while (!pq.empty()) {
@@ -75,21 +83,21 @@ vector<pair<int, int>> dijkstra(const unordered_map<char, int> &tileCosts, const
         int currRow = current.row;
         int currCol = current.col;
 
-        // If we reached the destination, stop
+        // Stop at destination
         if (currRow == endPos.first && currCol == endPos.second) {
             break;
         }
 
-        // Explore neighbors (up, down, left, right)
+        // Check up, down, left, right
         for (const auto &dir : directions) {
             int newRow = currRow + dir.first;
             int newCol = currCol + dir.second;
 
-            // Check if the new position is within bounds
-            if (newRow >= 0 && newRow < MAP_ROWS && newCol >= 0 && newCol < MAP_COLUMNS) {
+            // Check if the new position is in the map bounds
+            if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols) {
                 int newCost = dist[currRow][currCol] + tileCosts.at(mapLayout[newRow][newCol]);
 
-                // If a shorter path is found
+                // If a shorter path is found update
                 if (newCost < dist[newRow][newCol]) {
                     dist[newRow][newCol] = newCost;
                     pq.push({newRow, newCol, newCost});
@@ -103,9 +111,9 @@ vector<pair<int, int>> dijkstra(const unordered_map<char, int> &tileCosts, const
     vector<pair<int, int>> path;
     pair<int, int> cur = endPos;
 
-    // Handle case if no path exists
+    // If no path exisits
     if (dist[endPos.first][endPos.second] == INT_MAX) {
-        return path; // Return empty path indicating no solution
+        return path; 
     }
 
     while (cur != startPos) {
@@ -122,23 +130,20 @@ vector<pair<int, int>> dijkstra(const unordered_map<char, int> &tileCosts, const
 }
 
 int main() {
-    unordered_map<char, int> tileCosts;          // To store the cost of each tile type
-    vector<vector<char>> mapLayout;              // 2D map layout
-    pair<int, int> startPos, endPos;             // Runner's start and end positions
+    unordered_map<char, int> tileCosts;
+    vector<vector<char>> mapLayout;
+    pair<int, int> startPos, endPos;     
 
-    // Reading input
     readInput(tileCosts, mapLayout, startPos, endPos);
-
-    // Running Dijkstra's algorithm
     vector<pair<int, int>> path = dijkstra(tileCosts, mapLayout, startPos, endPos);
 
-    // Handle case when no path exists
+    // If no path exists
     if (path.empty()) {
         cout << "No path found" << endl;
         return 0;
     }
 
-    // Output the cost (including the ending tile's cost but excluding the starting tile's cost)
+    // Output the cost
     int totalCost = 0;
     for (size_t i = 0; i < path.size() - 1; ++i) {  // Exclude the starting tile
         totalCost += tileCosts[mapLayout[path[i].first][path[i].second]]; // Cost of entering each tile
