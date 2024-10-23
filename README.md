@@ -1,4 +1,4 @@
-Project 04: Path Finding 
+Project 04: Path Finding  
 Project Partners: David Cheves & Minh Cao 
 NetIDs: dcheves & mcao12
 
